@@ -1,0 +1,31 @@
+license="${mod_license}"
+
+[[mods]]
+modId="${mod_id}"
+version="${mod_version}"
+displayName="${mod_name}"
+description='''
+A lightweight local-video screen mod using Rinku/Chromium.
+Place rectangular grids of screen blocks, sneak-right-click a face, and choose a local video.
+'''
+
+[[dependencies.${mod_id}]]
+modId="neoforge"
+type="required"
+versionRange="[${neo_version},)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.${mod_id}]]
+modId="minecraft"
+type="required"
+versionRange="${minecraft_version_range}"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.${mod_id}]]
+modId="rinku"
+type="required"
+versionRange="[${rinku_version},)"
+ordering="AFTER"
+side="CLIENT"
