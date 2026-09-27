@@ -32,7 +32,7 @@ public final class LocalVideoScreensClient {
         var result = ScreenGeometry.discover(event.getLevel(), event.getPos(), event.getHitVec().getDirection());
         Minecraft mc = Minecraft.getInstance();
         if (!result.success()) {
-            if (mc.player != null) mc.player.displayClientMessage(Component.literal(result.error()), true);
+            if (mc.player != null) mc.player.sendOverlayMessage(Component.literal(result.error()));
             return;
         }
         mc.gui.setScreen(new VideoSelectScreen(result.geometry()));
