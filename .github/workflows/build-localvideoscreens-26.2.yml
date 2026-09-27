@@ -24,14 +24,6 @@ jobs:
         with:
           gradle-version: '9.2.1'
 
-      - name: Rebuild source ZIP
-        run: |
-          cat lvs_parts/part_aa.b64 lvs_parts/part_ab.b64 lvs_parts/part_ac.b64 lvs_parts/part_ad_aa.b64 lvs_parts/part_ad_ab.b64 > source.b64
-          base64 -d source.b64 > LocalVideoScreens-26.2-source.zip
-          unzip -t LocalVideoScreens-26.2-source.zip
-          rm -rf LocalVideoScreens-26.2
-          unzip -q LocalVideoScreens-26.2-source.zip
-
       - name: Build
         working-directory: LocalVideoScreens-26.2
         run: gradle build --stacktrace
