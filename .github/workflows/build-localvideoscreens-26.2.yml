@@ -1,0 +1,43 @@
+name: Build LocalVideoScreens 26.2
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - localvideoscreens-26.2-build
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Java 25
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '25'
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '9.2.1'
+
+      - name: Extract LocalVideoScreens source
+        run: |
+          rm -rf LocalVideoScreens-26.2
+          unzip -q LocalVideoScreens-26.2-source.zip
+
+      - name: Build
+        working-directory: LocalVideoScreens-26.2
+        run: gradle build --stacktrace
+
+      - name: Upload mod JAR
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: LocalVideoScreens-26.2-jar
+          path: |
+            LocalVideoScreens-26.2/build/libs/*.jar
+          if-no-files-found: error
